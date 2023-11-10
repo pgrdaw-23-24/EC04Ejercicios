@@ -14,16 +14,13 @@ class Poligono {
 
     perimetro() {
         let perimetro = 0
-        for (let i = 0; i < this._vertices.length - 1; i++) {
+        let saltos = [...this._vertices, this._vertices[0]]
+        for (let i = 0; i < saltos.length - 1; i++) {
             perimetro += Math.sqrt(
-                Math.pow(Math.abs(this._vertices[i][0] - this._vertices[i + 1][0]), 2) +
-                Math.pow(Math.abs(this._vertices[i][1] - this._vertices[i + 1][1]), 2)
+                Math.pow(Math.abs(saltos[i][0] - saltos[i + 1][0]), 2) +
+                Math.pow(Math.abs(saltos[i][1] - saltos[i + 1][1]), 2)
             )
         }
-        perimetro += Math.sqrt(     // el último lado
-            Math.pow(Math.abs(this._vertices[this._vertices.length - 1][0] - this._vertices[0][0]), 2) +
-            Math.pow(Math.abs(this._vertices[this._vertices.length - 1][1] - this._vertices[0][1]), 2)
-        )
         return perimetro
     }
 
@@ -43,6 +40,4 @@ class Cuadrado extends Rectangulo {
 
 
 
-
-
-export { Cuadrado, Rectangulo } //, Triangulo }
+export { Poligono, Cuadrado, Rectangulo } //, Triangulo }
