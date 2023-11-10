@@ -4,7 +4,7 @@ let poligono1 = new Poligono.Poligono([[0, 0], [30, 58], [65, 97], [52, 59], [30
 console.log(poligono1)
 console.log('Perimetro:',poligono1.perimetro())
 
-let triangulo1 = new Poligono.Triangulo([[0, 0], [30, 58], [65, 97]])
+let triangulo1 = new Poligono.Triangulo([[0, 0], [1, 2], [-2, -5]])
 console.log(triangulo1)
 console.log('Perimetro:',triangulo1.perimetro())
 
