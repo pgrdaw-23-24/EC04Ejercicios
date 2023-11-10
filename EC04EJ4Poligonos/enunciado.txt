@@ -5,5 +5,3 @@ mismos.
 El perímetro de un polígono se calcula sumando la longitud de sus lados.
  No todos los conjuntos de 3 puntos forman un triángulo. No todos los
 conjuntos de 4 puntos forman cuadrados o rectángulos.
-
-prueba git 
