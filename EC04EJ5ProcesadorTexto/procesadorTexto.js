@@ -10,16 +10,16 @@ function anadirCabecera(ancho) {
 function recortarEnteras(textoEntrada, ancho) {
     let textoSalida = ""
     while (textoEntrada.length > ancho) {
-        textoSalida += textoEntrada.substring(0, ancho - 1)
-        textoEntrada = textoEntrada.substring(ancho, )
+        textoSalida += textoEntrada.substring(0, ancho) + '\n'
+        textoEntrada = textoEntrada.substring(ancho)
     }
     return textoSalida
 }
 
 function recortarResto(textoEntrada, ancho) {
-    let textoSalida = ""
-    while (textoEntrada.length > ancho) {
-        textoSalida += textoEntrada.substring(0, ancho - 1)
+    let textoSalida = textoEntrada
+    while (textoSalida.length > ancho) {
+        textoSalida = textoSalida.substring(ancho)
     }
     return textoSalida
 }
@@ -49,7 +49,7 @@ function realizarAccion(textoEntrada, accion, ancho) {
     return textoSalida
 }
 
-function procesadorTexto(arrayParrafosAcciones) {    // args [texto1, accion1], [texto2, accion2]...
+function procesadorTexto(arrayParrafosAcciones) {    // args [[texto1, accion1], [texto2, accion2]...]
     let textoSalida = ""
     let ancho = 15
     let token = [...arrayParrafosAcciones]
@@ -57,11 +57,23 @@ function procesadorTexto(arrayParrafosAcciones) {    // args [texto1, accion1], 
     textoSalida += anadirCabecera(ancho)
 
     for (let i = 0; i < token.length; i++) {
-        textoSalida += realizarAccion(token[i][0], token[i][1], ancho)
+        textoSalida += recortarEnteras(token[i][0])
+        textoSalida += realizarAccion(recortarResto(token[i][0]), token[i][1], ancho)
     }
 
     return textoSalida
 }
 
+// tests
+let token = [
+    ['Tres tigres blancos Tres tigres blancos', 'justificado izquierda'],
+    ['Comían', 'justificado centro'],
+    ['El trigal', 'justificado derecha']
+]
+let ancho = 15
+console.log(anadirCabecera(ancho))
+console.log(recortarEnteras(token[0][0], 15))
+console.log(recortarResto(token[0][0], 15))
+console.log(procesadorTexto(token))
 
 export default procesadorTexto
