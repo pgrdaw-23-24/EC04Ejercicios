@@ -1,0 +1,7 @@
+1.EJERCICIO 4: POLÍGONOS
+Implementar una clase Polígono que se componga de n puntos. Implementa las clase Cuadrado,
+Rectángulo y Triángulo que tengan una función perimetro() que calcule el perímetro de los
+mismos.
+El perímetro de un polígono se calcula sumando la longitud de sus lados.
+ No todos los conjuntos de 3 puntos forman un triángulo. No todos los
+conjuntos de 4 puntos forman cuadrados o rectángulos.
