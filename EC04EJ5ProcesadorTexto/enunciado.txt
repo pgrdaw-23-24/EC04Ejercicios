@@ -1,0 +1,18 @@
+2.EJERCICIO 5: PROCESADOR DE TEXTOS
+Crea un mini-procesador de textos. El procesador de textos debe admitir párrafos que pueden
+estar justificados al centro, a la izquierda o a la derecha.
+Dado un ancho en caracteres debe generar un array de cadenas donde cada elemento será una
+cadena que tendrá como longitud el ancho en caracteres dado, completando con espacios para
+justificar.
+Por ejemplo, dados estos párrafos:
+• Párrafo 1: “Tres tigres blancos”, justificado izquierda
+• Párrafo 2: “Comían”, justificado centro
+• Párrafo 2: “El trigal”, justificado derecha
+La salida con ancho 15 sería (la primera línea es para contar los caracteres):
+123456789012345
+Tres·tigres····
+blancos········
+·····Comían ···
+······El trigal
+Si hay una palabra más larga que el ancho dado puedes partirla por donde quieras. En la tercera
+línea el espacio de más tiene que estar al principio.
