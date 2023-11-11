@@ -2,37 +2,29 @@ import * as Aspirador from "./aspirador.js"
 
 let simboloSuciedad = '0'
 
-class Polvo {
-    constructor(posy, posx, altura) {
-        this.tipo = 'polvo'
-        this.posy = posy
+class Suciedad {
+    constructor(posx, posy) {
         this.posx = posx
-        this.simbolo = 0        // la altura del polvo se representa en mm
-    }
-
-    depositar() {
-        if (this.simbolo < 9) {
-            this.simbolo++
-        }
-
+        this.posy = posy
+        this.simbolo = simboloSuciedad
     }
 }
 
 class EstacionEspacial {
 
-    constructor(alto, ancho) {
-        this.alto = alto
+    constructor(ancho, alto) {
         this.ancho = ancho
-        this.mapa = this.reiniciarMapaObjetos(alto, ancho)    // array 2D de objetos
-        this.roomba = []                                        // array de roombas
+        this.alto = alto
+        this.mapaObjetos = this.generarMapaObjetosVacio(ancho, alto)    // array 2D de objetos
+        this.roomba = []                                    // array de roombas
     }
 
-    reiniciarMapaObjetos(alto, ancho) {
+    generarMapaObjetosVacio(ancho, alto) {
         let mapa = []
         for (let j = 0; j < alto; j++) {
             mapa.push([])
             for (let i = 0; i < ancho; i++) {
-                mapa[j].push(new Polvo(i, j, 0))
+                mapa[j].push(new Suciedad(j, i))
             }
         }
         return mapa
@@ -43,15 +35,15 @@ class EstacionEspacial {
         for (let j = 0; j < this.alto; j++) {
             mapa.push([])
             for (let i = 0; i < this.ancho; i++) {
-                mapa[j].push(this.mapa[j][i].simbolo.toString())
+                mapa[j].push(this.mapaObjetos[j][i].simbolo)
             }
         }
         return mapa
     }
 
     posicionAleatoria() {
-        let posy = Math.floor(Math.random() * this.alto)
         let posx = Math.floor(Math.random() * this.ancho)
+        let posy = Math.floor(Math.random() * this.alto)
         return [posx, posy]
     }
 
@@ -94,17 +86,7 @@ class EstacionEspacial {
         let dir = this.direccionAleatoria()
         let nuevaRoomba = this.tipoRoomba(tipo, pos, dir)
         this.roomba.push(nuevaRoomba)       // guardar roomba en lista de roombas
-        this.mapa[pos[1]][pos[0]] = nuevaRoomba // guardar roomba en mapa
-    }
-
-    aumentarPolvo() {
-        for (let j = 0; j < this.alto; j++) {
-            for (let i = 0; i < this.ancho; i++) {
-                if (this.mapa[j][i].tipo == 'polvo') {
-                    this.mapa[j][i].depositar()
-                }
-            }
-        }
+        this.mapaObjetos[pos[1]][pos[0]] = nuevaRoomba // guardar roomba en mapa
     }
 
     /*
@@ -117,7 +99,6 @@ class EstacionEspacial {
         }
     }
     */
-
 
 
 }
