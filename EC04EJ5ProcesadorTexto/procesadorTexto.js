@@ -1,79 +1,64 @@
-function anadirCabecera(ancho) {
-
-    let cabecera = ""
-    for (let i = 1; i <= ancho; i++) {
-        cabecera += i % 10
-    }
-    return cabecera + '\n'
-}
-
-function recortarEnteras(textoEntrada, ancho) {
-    let textoSalida = ""
-    while (textoEntrada.length > ancho) {
-        textoSalida += textoEntrada.substring(0, ancho) + '\n'
-        textoEntrada = textoEntrada.substring(ancho)
-    }
-    return textoSalida
-}
-
-function recortarResto(textoEntrada, ancho) {
-    let textoSalida = textoEntrada
-    while (textoSalida.length > ancho) {
-        textoSalida = textoSalida.substring(ancho)
-    }
-    return textoSalida
-}
-
-function justificarIzquierda(textoEntrada, ancho) {
-    let textoSalida = ""
-    textoSalida += recortarEnteras(textoEntrada, ancho)
-    textoEntrada = recortarResto(textoEntrada, ancho)
-    return textoSalida
-}
-
-
-function realizarAccion(textoEntrada, accion, ancho) {
-    let textoSalida = ""
-
-    switch (accion) {             // accion
-        case 'justificado izquierda':
-            textoSalida += justificarIzquierda(textoEntrada, ancho)
-            break;
-        case 'justificado derecha':
-            textoSalida += 'justificado derecha\n'
-            break;
-        case 'justificado centro':
-            textoSalida += 'justificado centro\n'
-            break;
-    }
-    return textoSalida
-}
-
-function procesadorTexto(arrayParrafosAcciones) {    // args [[texto1, accion1], [texto2, accion2]...]
-    let textoSalida = ""
-    let ancho = 15
-    let token = [...arrayParrafosAcciones]
-
-    textoSalida += anadirCabecera(ancho)
-
-    for (let i = 0; i < token.length; i++) {
-        textoSalida += recortarEnteras(token[i][0])
-        textoSalida += realizarAccion(recortarResto(token[i][0]), token[i][1], ancho)
+class Parrafo {
+    constructor(parrafo) {
+        this.parrafo = parrafo
     }
 
-    return textoSalida
+    encajar(ancho) {
+        
+    }
+
+    justificarIzq() {
+        this.parrafo = 'justificarIzq'
+        return this.parrafo
+    }
+
+    descomponer() {                 // devuelve array de palabras
+        const delimitador = ' '
+        return this.parrafo.split(delimitador)
+    }
 }
 
-// tests
-let token = [
-    ['Tres tigres blancos Tres tigres blancos', 'justificado izquierda'],
-    ['Comían', 'justificado centro'],
-    ['El trigal', 'justificado derecha']
-]
-let ancho = 15
-console.log(anadirCabecera(ancho))
-console.log(recortarEnteras(token[0][0], 15))
-console.log(recortarResto(token[0][0], 15))
-console.log(procesadorTexto(token))
+class Accion {
+    constructor(accion) {
+        this.accion = accion
+    }
 
-export default procesadorTexto
+    funcion() {
+        let acciones = new Map([                            // acciones: Mapa que relaciona accion con funcion
+            ['justificado izquierda', 'justificarIzq()'],
+            ['justificado derecha', 'justificarDer()'],
+            ['justificado centro', 'justificarCen()']
+        ])
+        return acciones[this.accion]
+    }
+}
+
+
+class Token {                                               // token: pareja [ parrafo , accion ]
+    constructor(token) {
+        this.token = token
+        this.parrafo = new Parrafo(token[0])
+        this.accion = new Accion(token[1])
+    }
+
+    procesarToken() {
+        this.parrafo = eval(`this.parrafo.${this.accion.funcion()}`)    // elije funcion partiendo del Map de acciones         
+        return this.token
+    }
+}
+
+class ProcesadorTexto {
+    constructor(token) {
+        this.token = [...token]
+    }
+
+    procesarTexto() {
+        for (const t of this.token) {
+            t.procesarToken()
+        }
+    }
+}
+
+
+
+export { ProcesadorTexto, Token, Parrafo }
