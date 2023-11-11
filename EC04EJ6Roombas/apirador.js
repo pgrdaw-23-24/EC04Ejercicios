@@ -1,6 +1,7 @@
 class Aspirador {
     constructor(posx, posy, direccion) {        // direcciones posibles: N, S, E, W
         this.fabricante = 'China'
+        this.tipo = 'Genérico'
         this.posx = posx
         this.posy = posy
         this.direccion = direccion
@@ -23,13 +24,73 @@ class Aspirador {
             case 'D': siguiente = 1; break;
             case 'I': siguiente = -1; break;
             default: throw '[ ERROR ] - sentidos permitidas D, I'
-        }        
-        for (let i = 1; i<=4; i++ ) {
+        }
+        for (let i = 1; i <= 4; i++) {
             if (this.direccion == direccion[i]) {
-                this.direccion = direccion[i+siguiente]
+                this.direccion = direccion[(i + siguiente)]
+                break;
             }
         }
     }
+
+    chocar() {
+
+    }
 }
 
-export { Aspirador }
+class AspiradorRuso extends Aspirador {
+    constructor(posx, posy, direccion) {
+        super(posx, posy, direccion)
+        this.tipo = 'Ruso'
+    }
+
+    chocar() {
+        this.girar('I')
+    }
+}
+
+class AspiradorEstadounidense extends Aspirador {
+    constructor(posx, posy, direccion) {
+        super(posx, posy, direccion)
+        this.tipo = 'Estadounidense'
+    }
+
+    chocar() {
+        this.girar('D')
+    }
+}
+
+class AspiradorEuropeo extends Aspirador {
+    constructor(posx, posy, direccion) {
+        super(posx, posy, direccion)
+        this.tipo = 'Europeo'
+        this.espera = 0
+    }
+
+    esperar() {
+        if (this.espera <= 0) {
+            this.espera = 0
+            return false
+        } else {
+            this.espera--
+            return true
+        }
+    }
+
+    avanzar() {
+        if (!this.esperar()) {
+            super.avanzar()
+        }
+    }
+
+    girarAleatorio() {
+        return Math.random() > 0.5 ? 'D' : 'I'
+    }
+
+    chocar() {
+        this.espera = 2
+        this.girar(this.girarAleatorio())
+    }
+}
+
+export { Aspirador, AspiradorRuso, AspiradorEstadounidense, AspiradorEuropeo }
