@@ -1,12 +1,10 @@
 import * as Aspirador from "./aspirador.js"
 
-let simboloSuciedad = '0'
-
 class Suciedad {
     constructor(posx, posy) {
         this.posx = posx
         this.posy = posy
-        this.simbolo = simboloSuciedad
+        this.simbolo = '0'
     }
 }
 
@@ -15,8 +13,7 @@ class EstacionEspacial {
     constructor(ancho, alto) {
         this.ancho = ancho
         this.alto = alto
-        this.mapa = this.generarMapaInicial(ancho, alto)    // array 2D de objetos
-        this.roomba = []                                    // array de roombas
+        this.mapa = this.generarMapaInicial(ancho, alto)
     }
 
     generarMapaInicial(ancho, alto) {
@@ -60,33 +57,23 @@ class EstacionEspacial {
         }
     }
 
-    tipoRoomba(tipo, pos, dir) {
-        let nuevaRoomba
+    anadirRoomba(tipo) {
+        let pos = this.posicionAleatoria()
+        let dir = this.direccionAleatoria()
+        let roomba = new Aspirador.Aspirador(pos[0], pos[1], dir)
         switch (tipo) {
             case 'Ruso':
-                nuevaRoomba = new Aspirador.AspiradorRuso(pos[0], pos[1], dir)
+                roomba = new Aspirador.AspiradorRuso(pos[0], pos[1], dir)
                 break;
             case 'Estadounidense':
-                nuevaRoomba = new Aspirador.AspiradorEstadounidense(pos[0], pos[1], dir)
+                roomba = new Aspirador.AspiradorEstadounidense(pos[0], pos[1], dir)
                 break;
             case 'Europeo':
-                nuevaRoomba = new Aspirador.AspiradorEuropeo(pos[0], pos[1], dir)
+                roomba = new Aspirador.AspiradorEuropeo(pos[0], pos[1], dir)
                 break;
             default:
-                nuevaRoomba = new Aspirador.Aspirador(pos[0], pos[1], dir)
         }
-        return nuevaRoomba
-    }
-
-    anadirRoomba(tipo) {
-        let pos
-        do {        // posicionar roomba en un sitio donde no haya otra
-            pos = this.posicionAleatoria()
-        } while (this.mostrarMapa()[pos[1]][pos[0]] != simboloSuciedad)
-        let dir = this.direccionAleatoria()
-        let nuevaRoomba = this.tipoRoomba(tipo, pos, dir)
-        this.roomba.push(nuevaRoomba)       // guardar roomba en lista de roombas
-        this.mapa[pos[1]][pos[0]] = nuevaRoomba // guardar roomba en mapa
+        this.mapa[pos[1]][pos[0]] = roomba
     }
 }
 

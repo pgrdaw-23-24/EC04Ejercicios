@@ -3,13 +3,18 @@ import * as Estacion from './estacionEspacial.js'
 
 
 let iss 
+
+// instante inicial
 iss = new Estacion.EstacionEspacial(6,4)
 iss.anadirRoomba()
 iss.anadirRoomba('Ruso')
 iss.anadirRoomba('Estadounidense')
 iss.anadirRoomba('Europeo')
-//console.log(iss.mapa)
+console.log(iss.roomba)
+console.log(iss.mapa)
 console.log(iss.mostrarMapa())
+
+
 
 
 /*
