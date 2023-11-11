@@ -1,0 +1,19 @@
+3.EJERCICIO 6: ROOMBAS
+En una estación espacial en forma de anillo han comprado unos cuantos aspiradores automáticos
+para ayudarles mantener la limpieza.
+La estación está dividida en N x M casillas. Los aspiradores se mueven en línea recta por turnos,
+avanzando una casilla cada turno. Ten en cuenta que la estación es cilíndrica, así que cuando los
+aspiradores se “salen” por la derecha vuelven a “entrar” por la izquierda y viceversa; lo mismo
+sucede arriba y abajo.
+En un momento dado puede coincidir más de un aspirador en una casilla. Se considera entonces
+que han chocado. Cuando sucede esto, los aspiradores reaccionarán de diferentes maneras:
+• Si el aspirador es ruso, al chocar con un obstáculo girará a la izquierda
+• Si el aspirador es estadounidense, girará a la derecha
+• Si el aspirador es europeo esperará dos turnos a recibir instrucciones de la central y luego
+cambiará de dirección aleatoriamente
+• China no ha participado —tiene su propia estación espacial— pero ha hecho todos los
+aspiradores.
+Implementa un simulador de limpieza de la estación que indice en cada momento dónde están los
+robots.
+Bonus: registra qué partes de la estación se han limpiado ya y detén los robots cuando toda la
+estación esté limpia.
