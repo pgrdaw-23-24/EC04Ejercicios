@@ -2,6 +2,7 @@ class Aspirador {
     constructor(posx, posy, direccion) {        // direcciones posibles: N, S, E, W
         this.fabricante = 'China'
         this.tipo = 'Genérico'
+        this.simbolo = 'G'
         this.posx = posx
         this.posy = posy
         this.direccion = direccion
@@ -42,6 +43,7 @@ class AspiradorRuso extends Aspirador {
     constructor(posx, posy, direccion) {
         super(posx, posy, direccion)
         this.tipo = 'Ruso'
+        this.simbolo = 'R'
     }
 
     chocar() {
@@ -53,6 +55,7 @@ class AspiradorEstadounidense extends Aspirador {
     constructor(posx, posy, direccion) {
         super(posx, posy, direccion)
         this.tipo = 'Estadounidense'
+        this.simbolo = 'A'
     }
 
     chocar() {
@@ -64,7 +67,9 @@ class AspiradorEuropeo extends Aspirador {
     constructor(posx, posy, direccion) {
         super(posx, posy, direccion)
         this.tipo = 'Europeo'
+        this.simbolo = 'E'
         this.espera = 0
+
     }
 
     esperar() {
