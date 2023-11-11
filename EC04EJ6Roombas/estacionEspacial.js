@@ -1,14 +1,12 @@
-import { Aspirador, AspiradorRuso, AspiradorEstadounidense, AspiradorEuropeo } from "./aspirador.js"
+import * as Aspirador from "./aspirador.js"
 
-
-class Sucio {
+class Suciedad {
     constructor(posx, posy) {
         this.posx = posx
         this.posy = posy
-        this.simbolo = 'P'
+        this.simbolo = '0'
     }
 }
-
 
 class EstacionEspacial {
 
@@ -23,7 +21,7 @@ class EstacionEspacial {
         for (let j = 0; j < alto; j++) {
             mapa.push([])
             for (let i = 0; i < ancho; i++) {
-                mapa[j].push(new Sucio(j, i))
+                mapa[j].push(new Suciedad(j, i))
             }
         }
         return mapa
@@ -51,22 +49,21 @@ class EstacionEspacial {
     anadirRoomba(tipo) {
         let pos = this.posicionAleatoria()
         let dir = this.direccionAleatoria()
-        let roomba
+        let roomba = new Aspirador.Aspirador(pos[0], pos[1], dir)
         switch (tipo) {
             case 'Ruso':
-                roomba = new AspiradorRuso(pos[0], pos[1], dir)
+                roomba = new Aspirador.AspiradorRuso(pos[0], pos[1], dir)
                 break;
             case 'Estadounidense':
-                roomba = new AspiradorEstadounidense(pos[0], pos[1], dir)
+                roomba = new Aspirador.AspiradorEstadounidense(pos[0], pos[1], dir)
                 break;
             case 'Europeo':
-                roomba = new AspiradorEuropeo(pos[0], pos[1], dir)
+                roomba = new Aspirador.AspiradorEuropeo(pos[0], pos[1], dir)
                 break;
             default:
-                roomba = new Aspirador(pos[0], pos[1], dir)
         }
 
-        this.mapa[pos[0]][pos[1]] = roomba
+        this.mapa[pos[1]][pos[0]] = roomba
     }
 
     mostrarMapa() {
@@ -82,14 +79,4 @@ class EstacionEspacial {
 
 }
 
-
 export { EstacionEspacial }
-
-
-// TESTS
-let iss = new EstacionEspacial(6, 4)
-//console.log(iss.mapa)
-iss.anadirRoomba('R')
-console.log(iss.mapa)
-console.log(iss.mostrarMapa())
-
