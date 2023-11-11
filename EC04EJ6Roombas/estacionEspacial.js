@@ -27,6 +27,17 @@ class EstacionEspacial {
         return mapa
     }
 
+    mostrarMapa() {
+        let mapa = []
+        for (let j = 0; j < this.alto; j++) {
+            mapa.push([])
+            for (let i = 0; i < this.ancho; i++) {
+                mapa[j].push(this.mapa[j][i].simbolo)
+            }
+        }
+        return mapa
+    }
+
     posicionAleatoria() {
         let posx = Math.floor(Math.random() * this.ancho)
         let posy = Math.floor(Math.random() * this.alto)
@@ -62,21 +73,8 @@ class EstacionEspacial {
                 break;
             default:
         }
-
         this.mapa[pos[1]][pos[0]] = roomba
     }
-
-    mostrarMapa() {
-        let mapa = []
-        for (let j = 0; j < this.alto; j++) {
-            mapa.push([])
-            for (let i = 0; i < this.ancho; i++) {
-                mapa[j].push(this.mapa[j][i].simbolo)
-            }
-        }
-        return mapa
-    }
-
 }
 
 export { EstacionEspacial }

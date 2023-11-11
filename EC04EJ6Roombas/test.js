@@ -1,6 +1,17 @@
 import * as Aspirador from './aspirador.js'
 import * as Estacion from './estacionEspacial.js'
 
+
+let iss 
+iss = new Estacion.EstacionEspacial(6,4)
+iss.anadirRoomba()
+iss.anadirRoomba('Ruso')
+iss.anadirRoomba('Estadounidense')
+iss.anadirRoomba('Europeo')
+//console.log(iss.mapa)
+console.log(iss.mostrarMapa())
+
+
 /*
 let roomba = []
 
@@ -33,13 +44,4 @@ roomba[3].avanzar()     //esperar
 roomba[3].avanzar()
 roomba[3].avanzar()
 console.log(roomba[3])*/
-
-let iss 
-iss = new Estacion.EstacionEspacial(6,4)
-iss.anadirRoomba()
-iss.anadirRoomba('Ruso')
-iss.anadirRoomba('Estadounidense')
-iss.anadirRoomba('Europeo')
-//console.log(iss.mapa)
-console.log(iss.mostrarMapa())
 
